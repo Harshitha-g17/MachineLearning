@@ -1,0 +1,25 @@
+#import libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+
+#prepare data
+np.random.seed(0)
+temp=np.random.randint(20,40,50)
+sales=2.5*temp+np.random.normal(0,5,50)
+df=pd.DataFrame({"Temperature":temp,'IceCreamSales':sales})
+
+#model
+x=df[['Temperature']]
+y=df['IceCreamSales']
+model=LinearRegression()
+model.fit(x,y)
+
+#plot
+plt.scatter(x,y,color='blue')
+plt.plot(x,model.predict(x),color='red')
+plt.xlabel("Temperature(°C)")
+plt.ylabel("Ice Cream Sales")
+plt.title("simple Linear Regression")
+plt.show()
