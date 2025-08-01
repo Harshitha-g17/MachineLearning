@@ -1,0 +1,20 @@
+#simple Ridge regression example
+#import libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import Ridge
+from sklearn.metrics import mean_squared_error
+#simple dataset
+x=np.array([[1],[2],[3],[4],[5]]) #feature
+y=np.array([1,2,1.3,3.75,2.25]) #Target
+#Ridge Regression Model
+model=Ridge(alpha=1.0) #Regularization strength
+model.fit(x,y)
+#predictions
+y_pred=model.predict(x)
+#results
+print("Predictions:",y_pred)
+print("Coefficients:",model.coef_)
+print("Intercept:",model.intercept_)
+print("Mse:",mean_squared_error(y,y_pred))
