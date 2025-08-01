@@ -1,0 +1,28 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+np.random.seed(1)
+study_hours=np.random.randint(1,10,50)
+attendance=np.random.randint(50,100,50)
+sleep_hours=np.random.randint(5,9,50)
+score=(5*study_hours+0.5*attendance+2*sleep_hours+np.random.normal(0,10,50))
+np.random.normal(0,10,50)
+df=pd.DataFrame({'studyHours':study_hours,'Attendance':attendance,'sleephours':sleep_hours,"Score":score})
+
+x=df[['studyHours','Attendance','sleephours']]
+y=df['Score']
+model=LinearRegression()
+model.fit(x,y)
+y_pred = model.predict(x)
+print("Coefficients:",model.coef_)
+print("Intercepts:",model.intercept_)
+# Plotting predicted vs actual scores
+plt.figure(figsize=(8, 6))
+plt.scatter(y, y_pred, color='blue', label='Predicted vs Actual')
+plt.plot([y.min(), y.max()], [y.min(), y.max()], color='red', linestyle='--', label='Ideal Fit')
+plt.xlabel("Actual Score")
+plt.ylabel("Predicted Score")
+plt.title("Actual vs Predicted Score")
+
+plt.show()
